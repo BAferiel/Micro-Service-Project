@@ -15,6 +15,23 @@ services:
     depends_on:
       - Eureka
 
+
+  Review:
+    container_name: review
+    build:
+      context: ./
+      dockerfile: Docker-review
+    ports:
+      - "8084:8084"
+    hostname: localhost
+    environment:
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://serviceregistry:8761/eureka/
+    image: "review"
+    depends_on:
+      - Eureka
+
+
+
   Service:
     container_name: service
     build:
