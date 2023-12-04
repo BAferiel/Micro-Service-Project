@@ -1,6 +1,0 @@
-FROM openjdk:20
-MAINTAINER microserviceproject
-ARG JAR_FILE=target*/.jar
-EXPOSE 8084
-ADD ./Reviews-1.0.0.jar app.jar
-ENTRYPOINT ["java", "-jar", "app.jar"]
