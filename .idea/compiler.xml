@@ -8,13 +8,15 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="EurekaServer" />
-        <module name="Reclamation" />
         <module name="Reviews" />
+        <module name="Commande_micro" />
+        <module name="Reclamation" />
       </profile>
     </annotationProcessing>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="Commande_micro" options="-parameters" />
       <module name="EurekaServer" options="-parameters" />
       <module name="Reclamation" options="-parameters" />
       <module name="Reviews" options="-parameters" />

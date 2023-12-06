@@ -75,7 +75,7 @@ services:
       context: ./
       dockerfile: dockerfile-commande
     ports:
-      - "8080:8080"
+      - "8088:8088"
     hostname: localhost
     environment:
       - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://serviceregistry:8761/eureka/
