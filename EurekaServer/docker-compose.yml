@@ -77,6 +77,28 @@ services:
       - MYSQL_DATABASE=commande_micro
     ports:
       - 3309:3306
+  Subscription:
+    container_name: subscription
+    build:
+      context: ./
+      dockerfile: dockerfile-subscription
+    ports:
+      - "8089:8089"
+    hostname: localhost
+    environment:
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://serviceregistry:8761/eureka/
+      - SPRING_DATASOURCE_URL=jdbc:mysql://docker-mysql_3:3306/Subscription?autoReconnect=true&useSSL=false
+    image: "subscription"
+    depends_on:
+      - Eureka
+      - docker-mysql_3
+  docker-mysql_3:
+    image: "mysql:5.6"
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=Subscription
+    ports:
+      - 3307:3306
   Eureka:
     container_name: serviceregistry
     build:
