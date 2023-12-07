@@ -5,13 +5,12 @@ services:
     container_name: reclamation
     build:
       context: ./
-      dockerfile: Docker-reclamation
     ports:
       - "8082:8082"
     hostname: localhost
     environment:
       - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://serviceregistry:8761/eureka/
-    image: "reclamation"
+    image: "service-reclamtion"
     depends_on:
       - Eureka
 
@@ -20,13 +19,13 @@ services:
     container_name: review
     build:
       context: ./
-      dockerfile: Docker-review
+
     ports:
       - "8084:8084"
     hostname: localhost
     environment:
       - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://serviceregistry:8761/eureka/
-    image: "review"
+    image: "service-review"
     depends_on:
       - Eureka
     
