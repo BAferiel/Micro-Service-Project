@@ -1,10 +1,11 @@
-version: "2.2"
+version: "3.7"
 services:
 
   Reclamation:
     container_name: reclamation
     build:
-      context: ./
+      context: .
+      dockerfile: ./Reclamation/Dockerfile
     ports:
       - "8082:8082"
     hostname: localhost
@@ -18,8 +19,8 @@ services:
   Review:
     container_name: review
     build:
-      context: ./
-
+      context: .
+      dockerfile: ./Reviews/Dockerfile
     ports:
       - "8084:8084"
     hostname: localhost
@@ -28,12 +29,14 @@ services:
     image: "service-review"
     depends_on:
       - Eureka
+
+
     
   Category:
     container_name: Category
     build:
-      context: ./
-      dockerfile: Docker-Category
+      context: .
+      dockerfile: ./Category/Dockerfile
     ports:
       - "8085:8085"
     hostname: localhost
@@ -48,78 +51,89 @@ services:
   Service:
     container_name: service
     build:
-      context: ./
-      dockerfile: Docker-service
+      context: .
+      dockerfile: ./Service/DockerFile
     ports:
       - "8083:8083"
     hostname: localhost
     environment:
       - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://serviceregistry:8761/eureka/
-      - SPRING_DATASOURCE_URL=jdbc:mysql://docker-mysql_2:3306/base_service?autoReconnect=true&useSSL=false
     image: "service"
     depends_on:
       - Eureka
-      - docker-mysql_2
+      - mysql
+    networks:
+      - mynetwork
 
-  docker-mysql_2:
-    image: "mysql:5.6"
-    environment:
-      - MYSQL_ALLOW_EMPTY_PASSWORD=1
-      - MYSQL_DATABASE=base_service
-    ports:
-      - 3308:3306
+
+
+
   Commande:
     container_name: commande
     build:
-      context: ./
-      dockerfile: dockerfile-commande
+      context: .
+      dockerfile: ./Commande_micro/Dockerfile
     ports:
       - "8088:8088"
     hostname: localhost
     environment:
       - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://serviceregistry:8761/eureka/
-      - SPRING_DATASOURCE_URL=jdbc:mysql://docker-mysql_1:3306/commande_micro?autoReconnect=true&useSSL=false
     image: "commande"
     depends_on:
       - Eureka
-      - docker-mysql_1
-  docker-mysql_1:
-    image: "mysql:5.6"
-    environment:
-      - MYSQL_ALLOW_EMPTY_PASSWORD=1
-      - MYSQL_DATABASE=commande_micro
-    ports:
-      - 3309:3306
+      - mysql
+    networks:
+      - mynetwork
+
+
   Subscription:
     container_name: subscription
     build:
-      context: ./
-      dockerfile: dockerfile-subscription
+      context: .
+      dockerfile: ./MicroSubscription/Dockerfile
     ports:
       - "8089:8089"
     hostname: localhost
     environment:
       - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://serviceregistry:8761/eureka/
-      - SPRING_DATASOURCE_URL=jdbc:mysql://docker-mysql_3:3306/Subscription?autoReconnect=true&useSSL=false
     image: "subscription"
     depends_on:
       - Eureka
-      - docker-mysql_3
-  docker-mysql_3:
-    image: "mysql:5.6"
-    environment:
-      - MYSQL_ROOT_PASSWORD=root
-      - MYSQL_DATABASE=Subscription
-    ports:
-      - 3307:3306
+      - mysql
+    networks:
+      - mynetwork
+
+
   Eureka:
     container_name: serviceregistry
     build:
-      context: ./
-      dockerfile: Dockerfile
+      context: ./EurekaServer
     ports:
       - "8761:8761"
     hostname: serviceregistry
     image: "eureka"
     environment:
       - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://serviceregistry:8761/eureka/
+
+  mysql:
+    image: mysql
+    #restart: unless-stopped
+    networks:
+      - internal
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./local_data_save:/var/lib/mysql
+      - ./dbScripts:/docker-entrypoint-initdb.d
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_USER: admin
+      MYSQL_PASSWORD: admin
+
+networks:
+  mynetwork:
+    driver: bridge
+  external:
+    driver: bridge
+  internal:
+    driver: bridge

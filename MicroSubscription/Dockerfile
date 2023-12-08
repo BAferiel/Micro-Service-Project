@@ -1,4 +1,4 @@
 FROM openjdk:17
 EXPOSE 8089
-ADD target/MicroSubscription-1.0.0.jar Microsubscription-1.0.0-SNAPSHOT.jar
-ENTRYPOINT ["java","-jar","Microsubscription-1.0.0-SNAPSHOT.jar"]
+ADD ./../MicroSubscription/target/MicroSubscription-1.0.0.jar MicroSubscription-1.0.0.jar
+ENTRYPOINT ["java","-jar","MicroSubscription-1.0.0.jar"]
