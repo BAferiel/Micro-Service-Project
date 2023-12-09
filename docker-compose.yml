@@ -105,9 +105,6 @@ services:
       - Eureka
     environment:
       - eureka.client.serviceUrl.defaultZone=http://serviceregistry:8761/eureka/
-    networks:
-      - mynetwork
-
 
   Eureka:
     container_name: serviceregistry
