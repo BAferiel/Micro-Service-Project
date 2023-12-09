@@ -61,9 +61,7 @@ services:
     image: "service"
     depends_on:
       - Eureka
-      - mysql
-    networks:
-      - mynetwork
+
 
 
 
@@ -81,9 +79,6 @@ services:
     image: "commande"
     depends_on:
       - Eureka
-      - mysql
-    networks:
-      - mynetwork
 
 
   Subscription:
@@ -92,14 +87,24 @@ services:
       context: .
       dockerfile: ./MicroSubscription/Dockerfile
     ports:
-      - "8089:8089"
+      - "8086:8086"
     hostname: localhost
     environment:
       - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://serviceregistry:8761/eureka/
     image: "subscription"
     depends_on:
       - Eureka
-      - mysql
+
+  gateway:
+    build:
+      context: ./API_Gateway_Server
+    ports:
+      - "8081:8081"
+    image: "apigateway"
+    depends_on:
+      - Eureka
+    environment:
+      - eureka.client.serviceUrl.defaultZone=http://serviceregistry:8761/eureka/
     networks:
       - mynetwork
 
@@ -137,3 +142,4 @@ networks:
     driver: bridge
   internal:
     driver: bridge
+
