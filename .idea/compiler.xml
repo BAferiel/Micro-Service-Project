@@ -17,6 +17,9 @@
         <module name="API_Gateway_Server" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="User" target="17" />
+    </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
@@ -27,6 +30,7 @@
       <module name="MicroSubscription" options="-parameters" />
       <module name="Reclamation" options="-parameters" />
       <module name="Reviews" options="-parameters" />
+      <module name="User" options="-parameters" />
       <module name="projet_microservice" options="-parameters" />
     </option>
   </component>

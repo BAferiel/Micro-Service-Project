@@ -1,10 +1,16 @@
 package com.esprit.microservice.projet_microservice.entite;
 
 import jakarta.persistence.*;
+import lombok.*;
 
 import java.io.Serializable;
 
 @Entity
+@Setter
+@Getter
+@ToString
+@AllArgsConstructor
+@NoArgsConstructor
 public class ServiceE implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -14,7 +20,7 @@ public class ServiceE implements Serializable {
     private  double tarif;
     private int dure;
     private String image;
-    public long getId(){return idService;}
+   /* public long getId(){return idService;}
     public void setId(long idService){this.idService=idService;}
     public String getTitle(){return title;}
     public void setTitle(String title){this.title=title;}
@@ -27,12 +33,13 @@ public class ServiceE implements Serializable {
     public String getImage(){return image;}
     public void setImage(String image){this.image=image;}
     public ServiceE() {}
-    public ServiceE(String title, String description,double tarif,int dure,String image) {
+    public ServiceE(long idService, String title, String description,double tarif,int dure,String image) {
+        this.idService=idService;
         this.description = description;
         this.title = title;
         this.dure = dure;
         this.image=image;
         this.tarif=tarif;
-    }
+    }*/
 
 }

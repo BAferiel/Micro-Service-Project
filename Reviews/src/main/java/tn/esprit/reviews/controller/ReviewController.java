@@ -11,6 +11,7 @@ import tn.esprit.reviews.service.IReview;
 import java.util.List;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:4200")
 @AllArgsConstructor
 @RequestMapping("review")
 public class ReviewController {
@@ -44,5 +45,10 @@ public class ReviewController {
     @GetMapping("getAllReviews")
     public List<Review> getAllReview() {
         return iReview.getAllReviews();
+    }
+
+    @GetMapping("/getReviewsByService")
+    public List<Review> getReviewsByService(@RequestParam String service){
+        return iReview.findByServiceName(service);
     }
 }

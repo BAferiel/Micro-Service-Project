@@ -5,6 +5,8 @@ import org.springframework.stereotype.Service;
 import tn.esprit.reviews.entity.Review;
 import tn.esprit.reviews.repo.ReviewRepo;
 
+import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -14,6 +16,8 @@ public class ReviewServiceIMP implements IReview {
 
     @Override
     public Review addReview(Review review) {
+
+        review.setReviewDate(LocalDate.now());
         return reviewRepo.save(review);
     }
 
@@ -36,5 +40,10 @@ public class ReviewServiceIMP implements IReview {
     public void deleteReview(Long idReview) {
         reviewRepo.deleteById(idReview);
 
+    }
+
+    @Override
+    public List<Review> findByServiceName(String serviceName) {
+        return reviewRepo.findByServiceName(serviceName);
     }
 }
