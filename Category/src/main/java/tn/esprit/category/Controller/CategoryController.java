@@ -35,7 +35,7 @@ public class CategoryController {
         categoryService.deleteCategory(id_category);
         return new ResponseEntity<>("Category with ID " + id_category + " deleted successfully",HttpStatus.OK);
     }
-    @GetMapping
+    @GetMapping("/getAllCategories")
     public List<Category> getAllCategories() {
         return categoryService.getAllCategories();
     }
