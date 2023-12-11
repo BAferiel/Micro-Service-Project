@@ -11,7 +11,7 @@ import tn.esprit.microservices.commande_micro.Services.CommandeServiceIMP;
 
 import java.util.List;
 
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = "*")
 @RestController
 @AllArgsConstructor
 @RequestMapping("/Commande")

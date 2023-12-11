@@ -23,7 +23,7 @@
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
-      <module name="API_Gateway_Server" options="-parameters" />
+      <module name="API_Gateway_Server" options="" />
       <module name="Category" options="-parameters" />
       <module name="Commande_micro" options="-parameters" />
       <module name="EurekaServer" options="-parameters" />

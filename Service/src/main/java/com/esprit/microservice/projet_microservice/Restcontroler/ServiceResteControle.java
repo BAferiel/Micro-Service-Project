@@ -12,7 +12,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/ServiceE")
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = "*")
 public class ServiceResteControle {
     @Autowired
     public ServiceServiceImp serviceServiceImp;

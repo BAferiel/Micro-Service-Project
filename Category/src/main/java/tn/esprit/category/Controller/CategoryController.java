@@ -10,7 +10,7 @@ import tn.esprit.category.Service.CategoryService;
 
 import java.util.List;
 
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = "*")
 @RestController
 @AllArgsConstructor
 @RequestMapping("category")
