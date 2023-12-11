@@ -95,6 +95,22 @@ services:
     depends_on:
       - Eureka
 
+  payment:
+    build: ./payement
+    ports:
+      - "3000:3000"
+    environment:
+      DATABASE_URL: "mongodb+srv://bahaeddine170:ebaiwDFSlXUMoCLb@cluster0.ag1fzjf.mongodb.net/test"
+
+  mongo:
+    image: mongo:latest
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: "bahaeddine170"
+      MONGO_INITDB_ROOT_PASSWORD: "ebaiwDFSlXUMoCLb"
+      MONGO_INITDB_DATABASE: "test"
+    ports:
+      - "27017:27017"
+
   gateway:
     build:
       context: ./API_Gateway_Server

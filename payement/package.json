@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon index.js"
+    "start": "babel-node index.js"
   },
   "keywords": [],
   "author": "",
@@ -21,6 +21,9 @@
     "stripe": "^14.8.0"
   },
   "devDependencies": {
+    "@babel/cli": "^7.23.4",
+    "@babel/core": "^7.23.5",
+    "@babel/preset-env": "^7.23.5",
     "@ngrok/ngrok": "^0.9.1",
     "nodemon": "^3.0.2"
   }
