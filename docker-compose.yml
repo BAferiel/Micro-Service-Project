@@ -61,9 +61,7 @@ services:
     image: "service"
     depends_on:
       - Eureka
-      - mysql
-    networks:
-      - mynetwork
+
 
 
 
@@ -81,9 +79,6 @@ services:
     image: "commande"
     depends_on:
       - Eureka
-      - mysql
-    networks:
-      - mynetwork
 
 
   Subscription:
@@ -92,17 +87,40 @@ services:
       context: .
       dockerfile: ./MicroSubscription/Dockerfile
     ports:
-      - "8089:8089"
+      - "8086:8086"
     hostname: localhost
     environment:
       - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://serviceregistry:8761/eureka/
     image: "subscription"
     depends_on:
       - Eureka
-      - mysql
-    networks:
-      - mynetwork
 
+  payment:
+    build: ./payement
+    ports:
+      - "3000:3000"
+    environment:
+      DATABASE_URL: "mongodb+srv://bahaeddine170:ebaiwDFSlXUMoCLb@cluster0.ag1fzjf.mongodb.net/test"
+
+  mongo:
+    image: mongo:latest
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: "bahaeddine170"
+      MONGO_INITDB_ROOT_PASSWORD: "ebaiwDFSlXUMoCLb"
+      MONGO_INITDB_DATABASE: "test"
+    ports:
+      - "27017:27017"
+
+  gateway:
+    build:
+      context: ./API_Gateway_Server
+    ports:
+      - "8081:8081"
+    image: "apigateway"
+    depends_on:
+      - Eureka
+    environment:
+      - eureka.client.serviceUrl.defaultZone=http://serviceregistry:8761/eureka/
 
   Eureka:
     container_name: serviceregistry
@@ -137,3 +155,4 @@ networks:
     driver: bridge
   internal:
     driver: bridge
+

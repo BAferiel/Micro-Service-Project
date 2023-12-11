@@ -14,4 +14,6 @@ public interface IReview {
     Review updateReview(Long idReview, Review updatedReview);
 
     void deleteReview(Long idReview);
+
+    List<Review> findByServiceName(String serviceName);
 }

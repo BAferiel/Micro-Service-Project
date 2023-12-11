@@ -7,6 +7,7 @@ import lombok.Setter;
 
 
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.Date;
 
 @Entity
@@ -18,9 +19,9 @@ public class Review implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long idReview;
     private String reviewer;
-    private String service;
+    private String serviceName;
     private int rating;
     private String comment;
     @Temporal(TemporalType.DATE)
-    private Date reviewDate;
+    private LocalDate reviewDate;
 }

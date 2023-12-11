@@ -12,6 +12,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/ServiceE")
+@CrossOrigin(origins = "http://localhost:4200")
 public class ServiceResteControle {
     @Autowired
     public ServiceServiceImp serviceServiceImp;
