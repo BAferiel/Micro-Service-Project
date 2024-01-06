@@ -36,7 +36,7 @@ This Docker Compose configuration sets up a microservices architecture using var
 - **Port**: 27017
 - **Credentials**:
     - Username: bahaeddine170
-    - Password: ebaiwDFSlXUMoCLb
+    - Password: 
     - Database: test
 
 ### MySQL Database
